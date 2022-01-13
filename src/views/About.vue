@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    this is about
     <i-icon icon="home" />
   </div>
 </template>
