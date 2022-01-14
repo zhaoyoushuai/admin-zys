@@ -13,7 +13,6 @@ export default {
   },
   computed: {
     locations() {
-      console.log(this.$route.matched);
       const matched = this.$route.matched.filter(
         (item) => item.meta && item.meta.title
       );

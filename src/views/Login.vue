@@ -69,21 +69,17 @@ export default {
       return pass;
     },
     async login() {
-      console.log(123);
-      // if (!this.validate()) return
-      // this.loading = true
-      // try {
-      //   await this.$store.dispatch('user/login')
-      //   this.loading = false
-      //   const { query } = this.$route
-      //   this.$router.push(query.redirect || '/')
-      // } catch (e) {
-      //   this.loading = false
-      // }
+      if (!this.validate()) return;
+      this.loading = true;
+      try {
+        await this.$store.dispatch("user/toLogin");
+        this.loading = false;
+        const { query } = this.$route;
+        this.$router.push(query.redirect || "/");
+      } catch (e) {
+        this.loading = false;
+      }
     },
-  },
-  created() {
-    console.log(this.$router);
   },
 };
 </script>

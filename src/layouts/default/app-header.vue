@@ -6,8 +6,8 @@
         >欢迎您，
         <!-- {{ user.username  }} -->
         admin
-        <i class="el-icon-arrow-down ml-10"
-      /></span>
+        <i class="el-icon-arrow-down ml-10" />
+      </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>退出登录</el-dropdown-item>
       </el-dropdown-menu>
@@ -18,7 +18,7 @@
 <script>
 // import { mapState } from "vuex";
 import settings from "@/settings";
-// import { removeLocalToken } from '@/utils'
+import { removeStorage } from "@/utils";
 
 export default {
   data() {
@@ -32,8 +32,8 @@ export default {
           cancelButtonText: "取消",
           type: "warning",
         });
-        // removeLocalToken()
-        window.location.href = "/";
+        removeStorage("token");
+        window.location.href = `/login?redirect=${this.$route.path}`;
       } catch (e) {
         // do nothing
       }
