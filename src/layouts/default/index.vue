@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :class="classApp">
     <div class="drawer-bg" @click="handleClickOutside"></div>
     <app-header></app-header>
     <app-sidebar></app-sidebar>
@@ -15,6 +15,7 @@ import AppHeader from "./app-header.vue";
 import AppMain from "./app-main.vue";
 import AppBreadcrumb from "./app-breadcrumb";
 import AppSidebar from "./app-sidebar";
+import { mapState } from "vuex";
 export default {
   components: {
     AppMain,
@@ -26,6 +27,16 @@ export default {
     handleClickOutside() {
       this.$store.dispatch("app/setDevice", "mobile");
       this.$store.dispatch("app/setSidebar", 0);
+    },
+  },
+  computed: {
+    ...mapState("app", ["device", "sidebarOpened"]),
+
+    classApp() {
+      return {
+        mobile: this.device === "mobile",
+        "hide-sidebar": !this.sidebarOpened,
+      };
     },
   },
 };

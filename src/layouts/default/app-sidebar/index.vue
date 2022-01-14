@@ -1,13 +1,10 @@
 <template>
   <el-scrollbar class="app-sidebar">
-    <el-menu>
-      <el-menu-item-group>
-        <el-menu-item index="1-1">
-          <i-icon icon="home" />
-          <span>选项2</span>
-        </el-menu-item>
-      </el-menu-item-group>
-
+    <el-menu :collapse="isCollapse">
+      <el-menu-item index="1-1">
+        <i-icon icon="home" />
+        <span slot="title">选项2</span>
+      </el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           <i-icon icon="home" />
@@ -21,7 +18,18 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState("app", ["sidebarOpened"]),
+    isCollapse() {
+      if (this.device === "mobile") {
+        return false;
+      }
+      return !this.sidebarOpened;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 @import "@/styles/variables";
@@ -53,17 +61,19 @@ export default {};
     width: 100%;
     border-right: 0;
     background-color: #2b2b2d;
-    .i-icon {
-      margin-right: 14px;
-    }
-    .el-menu-item {
+    .el-menu-item,
+    .el-submenu__title {
       font-family: PingFangSC-Semibold;
       font-weight: 600;
       font-size: 14px;
       color: #cdcdcd;
+      .i-icon {
+        margin: 0 4px;
+        margin-right: 10px;
+      }
       &.is-active {
         color: $--color-primary;
-        background: rgba(255, 255, 255, 0.1);
+        background: transparent;
         &:before {
           content: "";
           position: absolute;
@@ -76,20 +86,10 @@ export default {};
       }
       &:hover,
       &:focus {
-        background: rgba(255, 255, 255, 0.1);
+        background: transparent;
       }
     }
     .el-submenu {
-      .el-submenu__title {
-        font-family: PingFangSC-Semibold;
-        font-weight: 600;
-        font-size: 14px;
-        color: #cdcdcd;
-        &:hover,
-        &:focus {
-          background: transparent;
-        }
-      }
       &.is-active {
         .el-submenu__title {
           color: $--color-primary;
@@ -106,11 +106,6 @@ export default {};
         .el-menu .el-menu-item:before {
           display: none;
         }
-      }
-    }
-    &.el-menu--collapse {
-      .i-icon {
-        margin-left: 5px;
       }
     }
   }

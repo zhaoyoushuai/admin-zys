@@ -1,8 +1,10 @@
 <template>
-  <i-icon :icon="icon" @click="toggleSideBar" />
+  <div @click="toggleSideBar">
+    <i-icon :icon="icon" />
+  </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   methods: {
@@ -11,7 +13,7 @@ export default {
     },
   },
   computed: {
-    // ...mapState('app', ['sidebarOpened']),
+    ...mapState("app", ["sidebarOpened"]),
     icon() {
       return this.sidebarOpened ? "menu-fold" : "menu-unfold";
     },
@@ -20,7 +22,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .i-icon {
-  padding: 5px;
+  padding: 6px;
+  margin-left: 10px;
   font-size: 30px;
   color: #7d7e80;
   cursor: pointer;
