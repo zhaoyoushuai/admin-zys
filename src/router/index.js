@@ -16,50 +16,50 @@ Vue.use(VueRouter);
  *
  */
 
-const contanteRouter = [
+export const routerLayout = {
+  path: "/",
+  component: Layout,
+  children: [
+    // {
+    //   path: "/",
+    //   name: "Home",
+    //   meta: {
+    //     title: "home",
+    //   },
+    //   component: () => import("@/views/Home.vue"),
+    // },
+    // {
+    //   path: "/About",
+    //   name: "About",
+    //   meta: {
+    //     title: "about",
+    //   },
+    //   component: () => import("@/views/About.vue"),
+    // },
+  ],
+};
+
+export const contanteRouter = [
+  routerLayout,
   {
     path: "/login",
     name: "login",
     component: () => import("@/views/Login.vue"),
   },
-];
-
-const routes = [
-  ...contanteRouter,
   {
-    path: "/",
-    component: Layout,
-    children: [
-      {
-        path: "/",
-        name: "Home",
-        meta: {
-          title: "home",
-        },
-        component: () => import("@/views/Home.vue"),
-      },
-    ],
+    path: "/404",
+    component: () => import("@/views/404"),
   },
-  {
-    path: "/about",
-    component: Layout,
-    children: [
-      {
-        path: "/",
-        name: "About",
-        meta: {
-          title: "about",
-        },
-        component: () => import("@/views/About.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "*",
+  //   redirect: "/404",
+  // },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes: contanteRouter,
 });
 
 export default router;

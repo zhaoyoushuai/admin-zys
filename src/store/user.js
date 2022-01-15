@@ -1,4 +1,4 @@
-import { login } from "@/api/user";
+import { login, getUser } from "@/api/user";
 import { setStorage, removeStorage } from "@/utils";
 import { MessageBox } from "element-ui";
 
@@ -7,7 +7,11 @@ const app = {
   state: {
     userInfo: undefined,
   },
-
+  mutations: {
+    SET_INFO(state, data) {
+      state.userInfo = data;
+    },
+  },
   actions: {
     async logout(_, msg) {
       removeStorage("token");
@@ -26,6 +30,16 @@ const app = {
         login(data)
           .then((res) => {
             setStorage("token", res.token);
+            resolve(res);
+          })
+          .catch((e) => reject(e));
+      });
+    },
+    getInfo({ commit }) {
+      return new Promise((resolve, reject) => {
+        getUser()
+          .then((res) => {
+            commit("SET_INFO", res);
             resolve(res);
           })
           .catch((e) => reject(e));
