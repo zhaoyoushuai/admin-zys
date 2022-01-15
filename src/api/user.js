@@ -17,12 +17,12 @@ export function getUser() {
         mobile: "13173276550",
         menus: [
           {
-            path: "/Home",
+            path: "/home",
             name: "home",
             icon: "home",
           },
           {
-            path: "/About",
+            path: "/about",
             name: "about",
             icon: "home",
           },

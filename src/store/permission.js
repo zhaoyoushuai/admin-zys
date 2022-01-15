@@ -5,7 +5,7 @@ function addRouterComponents(menus) {
   return menus.map((item) => {
     return {
       ...item,
-      components: () => import("@/views" + item.path),
+      component: () => import("@/views" + item.path),
     };
   });
 }
@@ -18,10 +18,11 @@ export default {
   actions: {
     generateRoute(_, data) {
       const { menus } = data;
+      let children = [...addRouterComponents(menus)];
       return {
         ...routerLayout,
-        children: [...addRouterComponents(menus)],
-        redirect: [...addRouterComponents(menus)][0].path,
+        children: children,
+        redirect: children[0].path,
       };
     },
   },

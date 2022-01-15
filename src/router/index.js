@@ -22,19 +22,19 @@ export const routerLayout = {
   children: [
     // {
     //   path: "/",
-    //   name: "Home",
+    //   name: "home",
     //   meta: {
     //     title: "home",
     //   },
     //   component: () => import("@/views/Home.vue"),
     // },
     // {
-    //   path: "/About",
-    //   name: "About",
+    //   path: "/about",
+    //   name: "about",
     //   meta: {
     //     title: "about",
     //   },
-    //   component: () => import("@/views/About.vue"),
+    //   component: () => import("@/views/about.vue"),
     // },
   ],
 };
@@ -44,16 +44,16 @@ export const contanteRouter = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/Login.vue"),
+    component: () => import("@/views/login.vue"),
   },
   {
     path: "/404",
     component: () => import("@/views/404"),
   },
-  // {
-  //   path: "*",
-  //   redirect: "/404",
-  // },
+  {
+    path: "*",
+    redirect: "/404",
+  },
 ];
 
 const router = new VueRouter({
