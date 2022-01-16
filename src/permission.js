@@ -18,15 +18,12 @@ router.beforeEach(async (to, form, next) => {
           console.log(route);
           router.addRoute(route);
           router.addRoute(unmatchedRoute);
-          console.log(router.getRoutes());
           next({ ...to, replace: true }); // hack 确保刷新页面时可以加载当前路由, set replace: true 设置之后不会留下当前路由的记录
         } catch (e) {
           console.log(e);
           store.dispatch("user/logout");
         }
       } else {
-        console.log(router.getRoutes());
-
         next();
       }
     }

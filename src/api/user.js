@@ -26,6 +26,23 @@ export function getUser() {
             name: "about",
             icon: "home",
           },
+          {
+            path: "/seting",
+            name: "系统设置",
+            icon: "home",
+            children: [
+              {
+                path: "user",
+                name: "用户列表",
+                icon: "home",
+              },
+              {
+                path: "permission",
+                name: "权限管理",
+                icon: "home",
+              },
+            ],
+          },
         ],
       });
     }, 500);

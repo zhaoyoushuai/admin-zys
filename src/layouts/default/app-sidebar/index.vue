@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar class="app-sidebar">
-    <el-menu :collapse="isCollapse">
-      <el-menu-item index="1-1">
+    <el-menu :collapse="isCollapse" :default-active="defaultActive">
+      <!-- <el-menu-item index="1-1">
         <i-icon icon="home" />
         <span slot="title">选项2</span>
       </el-menu-item>
@@ -12,16 +12,25 @@
         </template>
         <el-menu-item index="1-1">选项1</el-menu-item>
         <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-submenu>
+      </el-submenu> -->
+      <SidebarItem v-for="menu in menus" :key="menu.path" :item="menu" />
     </el-menu>
   </el-scrollbar>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import SidebarItem from "./sidebar-item.vue";
 export default {
+  components: { SidebarItem },
   computed: {
     ...mapState("app", ["sidebarOpened"]),
+    ...mapState("permission", ["menus"]),
+    defaultActive() {
+      let { path } = this.$route;
+      console.log(path);
+      return path;
+    },
     isCollapse() {
       if (this.device === "mobile") {
         return false;

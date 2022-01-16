@@ -1,11 +1,21 @@
 import { routerLayout } from "@/router";
+import { EmptyLayout } from "@/layouts";
+import path from "path";
 
-function addRouterComponents(menus) {
+function getAsyncRoutes(menus, parentPath = "") {
   // 给每一个路由添加components
+  console.log(menus);
   return menus.map((item) => {
+    const hasChild = item.children && item.children.length > 0;
+    const _children = hasChild
+      ? getAsyncRoutes(item.children, item.path)
+      : undefined;
     return {
       ...item,
-      component: () => import("@/views" + item.path),
+      component: hasChild
+        ? EmptyLayout
+        : () => import("@/views" + path.resolve(parentPath, item.path)),
+      children: _children,
     };
   });
 }
@@ -26,7 +36,7 @@ export default {
     },
     generateRoute(_, data) {
       const { menus } = data;
-      let children = [...addRouterComponents(menus)];
+      let children = [...getAsyncRoutes(menus)];
       return {
         ...routerLayout,
         children: children,
