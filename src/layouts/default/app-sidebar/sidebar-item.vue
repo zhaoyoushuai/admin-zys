@@ -1,9 +1,9 @@
 <template>
-  <div v-if="!item.hidden">
-    <el-submenu
-      :index="resolvePath(item.path)"
-      v-if="hasOneShowingChild(item.children)"
-    >
+  <el-submenu
+    :index="resolvePath(item.path)"
+    v-if="hasOneShowingChild(item.children)"
+  >
+    <template v-if="!item.hidden">
       <template slot="title">
         <i-icon v-if="item.icon" :icon="item.icon" />
         <span class="title">{{ item.name }}</span>
@@ -14,16 +14,18 @@
         :item="child"
         :basePath="item.path"
       />
-    </el-submenu>
-    <el-menu-item
-      v-else
-      :index="resolvePath(item.path)"
-      @click="handleItemClick(resolvePath(item.path))"
-    >
+    </template>
+  </el-submenu>
+  <el-menu-item
+    v-else
+    :index="resolvePath(item.path)"
+    @click="handleItemClick(resolvePath(item.path))"
+  >
+    <template v-if="!item.hidden">
       <i-icon v-if="item.icon" :icon="item.icon" />
       <span class="title" slot="title">{{ item.name }}</span>
-    </el-menu-item>
-  </div>
+    </template>
+  </el-menu-item>
 </template>
 
 <script>

@@ -21,11 +21,7 @@ export function getUser() {
             name: "首页",
             icon: "home",
           },
-          {
-            path: "/about",
-            name: "about",
-            icon: "home",
-          },
+
           {
             name: "嵌套的路由",
             icon: "nested",

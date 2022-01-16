@@ -3,10 +3,11 @@
     <el-card shadow="hover" @click.native="$router.push('/example/select')">
       <el-button size="medium" type="text"> 下拉框演示 </el-button>
     </el-card>
-    <el-card shadow="hover">
-      <router-link to="/example/tree-select">
-        <el-button size="medium" type="text"> 下拉树演示 </el-button>
-      </router-link>
+    <el-card
+      shadow="hover"
+      @click.native="$router.push('/example/tree-select')"
+    >
+      <el-button size="medium" type="text"> 下拉树演示 </el-button>
     </el-card>
     <el-card
       shadow="hover"
