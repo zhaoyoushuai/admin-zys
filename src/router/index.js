@@ -16,6 +16,13 @@ Vue.use(VueRouter);
  *
  */
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch((err) => err);
+};
+
 export const routerLayout = {
   path: "/",
   component: Layout,
@@ -40,7 +47,6 @@ export const routerLayout = {
 };
 
 export const contanteRouter = [
-  routerLayout,
   {
     path: "/login",
     name: "login",
@@ -50,11 +56,13 @@ export const contanteRouter = [
     path: "/404",
     component: () => import("@/views/404"),
   },
-  {
-    path: "*",
-    redirect: "/404",
-  },
 ];
+
+// 未匹配的路由需要跳转的页面在这里配置
+export const unmatchedRoute = {
+  path: "*",
+  redirect: "/404",
+};
 
 const router = new VueRouter({
   mode: "history",

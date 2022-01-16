@@ -15,7 +15,15 @@ export default {
   state: {
     menus: [],
   },
+  mutations: {
+    SET_MENUS(state, data) {
+      state.menus = data;
+    },
+  },
   actions: {
+    setMenus({ commit }, data) {
+      commit("SET_MENUS", data);
+    },
     generateRoute(_, data) {
       const { menus } = data;
       let children = [...addRouterComponents(menus)];
