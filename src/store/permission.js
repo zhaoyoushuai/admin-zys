@@ -4,7 +4,6 @@ import path from "path";
 
 function getAsyncRoutes(menus, parentPath = "") {
   // 给每一个路由添加components
-  console.log(menus);
   return menus.map((item) => {
     const hasChild = item.children && item.children.length > 0;
     const _children = hasChild
@@ -36,7 +35,7 @@ export default {
     },
     generateRoute(_, data) {
       const { menus } = data;
-      let children = [...getAsyncRoutes(menus)];
+      let children = [...getAsyncRoutes(menus), ...routerLayout.children];
       return {
         ...routerLayout,
         children: children,

@@ -1,18 +1,6 @@
 <template>
   <el-scrollbar class="app-sidebar">
     <el-menu :collapse="isCollapse" :default-active="defaultActive">
-      <!-- <el-menu-item index="1-1">
-        <i-icon icon="home" />
-        <span slot="title">选项2</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i-icon icon="home" />
-          <span>导航一</span>
-        </template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-submenu> -->
       <SidebarItem v-for="menu in menus" :key="menu.path" :item="menu" />
     </el-menu>
   </el-scrollbar>
@@ -27,8 +15,10 @@ export default {
     ...mapState("app", ["sidebarOpened"]),
     ...mapState("permission", ["menus"]),
     defaultActive() {
-      let { path } = this.$route;
-      console.log(path);
+      let { meta, path } = this.$route;
+      if (meta.activeMenu) {
+        return meta.activeMenu;
+      }
       return path;
     },
     isCollapse() {

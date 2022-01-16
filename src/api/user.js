@@ -17,8 +17,8 @@ export function getUser() {
         mobile: "13173276550",
         menus: [
           {
-            path: "/home",
-            name: "home",
+            path: "/dashboard",
+            name: "首页",
             icon: "home",
           },
           {
@@ -27,21 +27,24 @@ export function getUser() {
             icon: "home",
           },
           {
-            path: "/seting",
-            name: "系统设置",
-            icon: "home",
+            name: "嵌套的路由",
+            icon: "nested",
+            path: "nested",
             children: [
               {
-                path: "user",
-                name: "用户列表",
-                icon: "home",
+                name: "子路由1",
+                path: "child1",
               },
               {
-                path: "permission",
-                name: "权限管理",
-                icon: "home",
+                name: "子路由2",
+                path: "child2",
               },
             ],
+          },
+          {
+            name: "无嵌套的路由",
+            icon: "file",
+            path: "without-nested",
           },
         ],
       });

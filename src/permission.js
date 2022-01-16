@@ -6,6 +6,7 @@ import store from "@/store";
 const whiteList = ["/login"];
 
 router.beforeEach(async (to, form, next) => {
+  console.log(router.getRoutes());
   if (getStorage("token")) {
     if (to.path === "/login") {
       next("/");
@@ -15,7 +16,6 @@ router.beforeEach(async (to, form, next) => {
           const user = await store.dispatch("user/getInfo");
           store.dispatch("permission/setMenus", user.menus);
           const route = await store.dispatch("permission/generateRoute", user);
-          console.log(route);
           router.addRoute(route);
           router.addRoute(unmatchedRoute);
           next({ ...to, replace: true }); // hack 确保刷新页面时可以加载当前路由, set replace: true 设置之后不会留下当前路由的记录

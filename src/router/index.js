@@ -9,9 +9,9 @@ Vue.use(VueRouter);
  *  redirect: noRedirect    if set noRedirect will no redirect in the breadcrumb
  *  name:'router-name'
  *  meta:{
- *   title: 'title'
+ *   title: "about",                                    右侧菜单展示内容
  *   icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
- *   activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+ *   activeMenu:"/xxx"                                  高亮地址，格式: /xxx/xxx
  *  }
  *
  */
@@ -27,35 +27,38 @@ export const routerLayout = {
   path: "/",
   component: Layout,
   children: [
-    // {
-    //   path: "/",
-    //   name: "home",
-    //   meta: {
-    //     title: "home",
-    //   },
-    //   component: () => import("@/views/Home.vue"),
-    // },
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   meta: {
-    //     title: "about",
-    //   },
-    //   component: () => import("@/views/about.vue"),
-    // },
+    {
+      path: "nested/child1/second",
+      name: "NestedChild1Second",
+      component: () => import("@/views/nested/child1/second"),
+      meta: {
+        title: "嵌套的路由 / 子路由1 / 二级路由",
+        activeMenu: "/nested/child1",
+      },
+    },
+    {
+      path: "without-nested/second",
+      name: "WithoutNestedSecond",
+      component: () => import("@/views/without-nested/second"),
+      meta: {
+        title: "无嵌套的路由 / 二级路由",
+        activeMenu: "/without-nested",
+      },
+    },
   ],
 };
 
-export const contanteRouter = [
+const staticRouter = [
   {
     path: "/login",
     name: "login",
     component: () => import("@/views/login.vue"),
   },
-  {
-    path: "/404",
-    component: () => import("@/views/404"),
-  },
+
+  // {
+  //   path: "/404",
+  //   component: () => import("@/views/404"),
+  // },
 ];
 
 // 未匹配的路由需要跳转的页面在这里配置
@@ -67,7 +70,7 @@ export const unmatchedRoute = {
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: contanteRouter,
+  routes: staticRouter,
 });
 
 export default router;
