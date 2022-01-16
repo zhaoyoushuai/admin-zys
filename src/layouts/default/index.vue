@@ -11,12 +11,14 @@
 </template>
 
 <script>
+import resizeHandler from "./mixin/resize";
 import AppHeader from "./app-header.vue";
 import AppMain from "./app-main.vue";
 import AppBreadcrumb from "./app-breadcrumb";
 import AppSidebar from "./app-sidebar";
 import { mapState } from "vuex";
 export default {
+  mixins: [resizeHandler],
   components: {
     AppMain,
     AppHeader,
@@ -68,8 +70,10 @@ export default {
   &.hide-sidebar:not(.mobile) ::v-deep {
     .app-sidebar {
       width: 64px;
-      .el-submenu__title .el-submenu__icon-arrow {
-        display: none;
+      .el-submenu__title {
+        .el-submenu__icon-arrow {
+          display: none;
+        }
       }
       .title {
         opacity: 0;

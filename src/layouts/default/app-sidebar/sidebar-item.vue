@@ -1,9 +1,12 @@
 <template>
   <div v-if="!item.hidden">
-    <el-submenu index="2" v-if="hasOneShowingChild(item.children)">
+    <el-submenu
+      :index="resolvePath(item.path)"
+      v-if="hasOneShowingChild(item.children)"
+    >
       <template slot="title">
         <i-icon v-if="item.icon" :icon="item.icon" />
-        <span>{{ item.name }}</span>
+        <span class="title">{{ item.name }}</span>
       </template>
       <sidebar-item
         v-for="child in item.children"
@@ -18,8 +21,7 @@
       @click="handleItemClick(resolvePath(item.path))"
     >
       <i-icon v-if="item.icon" :icon="item.icon" />
-      <span slot="title">{{ item.name }}</span>
-      <span slot="title">{{ item.basePath }}</span>
+      <span class="title" slot="title">{{ item.name }}</span>
     </el-menu-item>
   </div>
 </template>
